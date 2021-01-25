@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.jacyirice.mdc;
+import java.util.Objects;
 
 /**
  *
@@ -37,11 +38,7 @@ public class MathUtil {
         if (b == 0) {
             return Math.abs(a);
         }
-
-        if (a % b != 0) {
-            return 1;
-        }
-        return -1;
+        return mdc(a-b,b);
     }
     
     public static boolean isPrimo(final long numero){
@@ -56,5 +53,18 @@ public class MathUtil {
         }
 
         return true;
+    }
+    
+    public static int mdc(int ...valores){
+        Objects.requireNonNull(valores, "O parâmetro valores não pode ser nulo para calcular o MDC!");
+        if(valores.length == 0){
+            throw new IllegalArgumentException("É preciso indicar ao "
+                    + "menos um valor para calcular o mdc!");
+        }
+        int a = valores[0];
+        for (int b : valores) {
+            a = mdc(a,b);
+        }
+        return a;
     }
 }
